@@ -1,11 +1,11 @@
 FROM node:20-alpine as builder
 
-ARG CHINA_MIRROR=false
+ARG CHINA_MIRROR=true
 
 # enable china mirror when ENABLE_CHINA_MIRROR is true
 RUN if [[ "$CHINA_MIRROR" = "true" ]] ; then \
     echo "Enable China Alpine Mirror" && \
-    sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories; \
+    sed -i 's#https\?://dl-cdn.alpinelinux.org/alpine#https://mirrors.tuna.tsinghua.edu.cn/alpine#g' /etc/apk/repositories; \
     fi
 
 RUN if [[ "$CHINA_MIRROR" = "true" ]] ; then \
